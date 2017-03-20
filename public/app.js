@@ -1,4 +1,53 @@
 let print = true;
+
+let GreeterMessage = React.createClass({
+
+    render: function () {
+        return (
+            <div>
+                <h1>Hello from {this.props.name}</h1>
+                <p>{this.props.message}</p>
+            </div>
+        );
+    }
+});
+
+let GreeterForm = React.createClass({
+    onFormSubmit: function (e) {
+        e.preventDefault();
+        var updates={
+
+        };
+        var name = this.refs.name;
+        var message=this.refs.message;
+        var nameValue = name.value;
+        var messageValue=message.value;
+
+        if (nameValue.length > 0) {
+            name.value = '';
+            updates.name=nameValue;
+        }
+        if(messageValue.length>0){
+            message.value='';
+            updates.message=messageValue;
+        }
+
+        this.props.onNewData(updates);
+    },
+
+    render: function () {
+        return (
+            <div>
+                <form onSubmit={this.onFormSubmit}>
+                    <div>  <input type="text" ref="name"/> </div>
+                   <div><textarea ref="message"/></div>
+                    <button type="submit">Set Name</button>
+                </form>
+            </div>
+        );
+    }
+});
+
 let Greeter = React.createClass({
 
     getDefaultProps: function () {
@@ -17,12 +66,12 @@ let Greeter = React.createClass({
         }
     },
 
-    getInitialState:function(){
+    getInitialState: function () {
         if (print) {
             console.log('getDefaultState');
         }
-        return{
-          name:this.props.name
+        return {
+            name: this.props.name
         };
     },
     componentDidMount: function () {
@@ -32,30 +81,20 @@ let Greeter = React.createClass({
     },
 
 
-    onButtonClick: function (e) {
-        e.preventDefault();
-        var nameRef=this.refs.name;
-        const name = nameRef.value;
-        nameRef.value='';
-
-        if(typeof(name==='string')&&name.length>0) {
-            this.setState({name: name});
-        }
+    handleDataUpdate: function (data) {
+        console.log('data is', data);
+        this.setState(data);
     },
 
     render: function () {
         return (<div>
-                <h1>Hello from {this.state.name}</h1>
-                <p>{this.props.message + '!!'}'</p>
-                <form onSubmit={this.onButtonClick}>
-                    <input type="text" ref="name"/>
-                    <button type="submit">Set Name</button>
-                </form>
+                <GreeterMessage name={this.state.name} message={this.state.message} />
+                <GreeterForm onNewData={this.handleDataUpdate}  />
             </div>
         );
     }
 });
 
 ReactDOM.render(
-    <Greeter name="Preet"/>
+    <Greeter name="Preet" message="Message from reactDom"/>
     , document.getElementById('app'));
