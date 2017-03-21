@@ -1,3 +1,4 @@
+import * as React from "react";
 let print = true;
 
 let GreeterMessage = React.createClass({
@@ -15,9 +16,7 @@ let GreeterMessage = React.createClass({
 let GreeterForm = React.createClass({
     onFormSubmit: function (e) {
         e.preventDefault();
-        var updates={
-
-        };
+        let updates = {};
         var name = this.refs.name;
         var message=this.refs.message;
         var nameValue = name.value;
@@ -95,6 +94,5 @@ let Greeter = React.createClass({
     }
 });
 
-ReactDOM.render(
-    <Greeter name="Preet" message="Message from reactDom"/>
-    , document.getElementById('app'));
+
+export {Greeter}
