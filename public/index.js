@@ -1,12 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
 import {createStore, applyMiddleware} from 'redux';
+import {Route, Router, IndexRoute, hashHistory} from 'react-router';
+import Main from './components/main';
+import Weather from './components/weather';
+import About from "./components/About";
+import Examples from "./components/Examples";
 
-import {Greeter} from "./components/Greeter";
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
-        <Greeter />
+  <Router history={hashHistory}>
+    <Route path="/" component={Main}>
+      <Route path="about" component={About} />
+      <Route path="examples" component={Examples} />
+      <IndexRoute component={Weather}/>
+    </Route>
+  </Router>
     , document.querySelector('.container'));
