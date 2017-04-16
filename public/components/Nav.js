@@ -1,8 +1,6 @@
 import React from 'react';
 import {Link,IndexLink } from 'react-router';
 
-import About from "./About";
-
 const Nav=()=>{
   return (
     <div>

@@ -1,10 +1,7 @@
+import React, {Component} from 'react';
 
-import React, { Component } from 'react';
-
-export default class Examples extends Component{
-  render(){
-    return(
-      <h3>Examples</h3>
-    )
-  }
+const Examples = () => {
+  return <h3>Examples...</h3>;
 };
+
+export default Examples;

@@ -1,8 +1,6 @@
 import * as React from "react";
 
-const WeatherMessage=(props)=> {
- // console.log('locatino is', props);
-  let{temp,location}=props;
+const WeatherMessage=({temp,location})=> {
   return <div>
     <h3>It's {temp} in {location}</h3>
   </div>;
