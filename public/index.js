@@ -10,7 +10,6 @@ import css from 'style!css!foundation-sites/dist/foundation.css';
 //require('style!css!foundation-sites/dist/foundation.css');
 $(document).foundation();
 
-
 const createStoreWithMiddleware = applyMiddleware()(createStore);
 
 ReactDOM.render(
