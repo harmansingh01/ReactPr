@@ -34,7 +34,7 @@ export default class Weather extends Component {
   }
 
   render() {
-    console.log('inside render');
+    //console.log('inside render');
     return (
       <div>
         <h3>Weather Component</h3>

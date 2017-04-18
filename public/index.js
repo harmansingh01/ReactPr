@@ -6,6 +6,9 @@ import Main from './components/main';
 import Weather from './components/weather';
 import About from "./components/About";
 import Examples from "./components/Examples";
+import css from 'style!css!foundation-sites/dist/foundation.css';
+//require('style!css!foundation-sites/dist/foundation.css');
+$(document).foundation();
 
 
 const createStoreWithMiddleware = applyMiddleware()(createStore);

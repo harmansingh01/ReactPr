@@ -1,6 +1,19 @@
+let webpack=require('webpack');
+
 module.exports={
     entry: [
+       'script!jquery/dist/jquery.js',
+        'script!foundation-sites/dist/foundation.js',
         './public/index.js'
+    ],
+    externals:{
+      jquery:'jQuery'
+    },
+    plugins:[
+      new webpack.ProvidePlugin({
+        '$':'jquery',
+        'jQuery':'jquery'
+      })
     ],
     output:{
         path: __dirname,
