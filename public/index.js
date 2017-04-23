@@ -7,6 +7,7 @@ import Weather from './components/weather';
 import About from "./components/About";
 import Examples from "./components/Examples";
 import css from 'style!css!foundation-sites/dist/foundation.css';
+//import css1 from 'style!css!../public/styles/app.css';
 //require('style!css!foundation-sites/dist/foundation.css');
 $(document).foundation();
 

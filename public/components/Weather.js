@@ -12,10 +12,30 @@ export default class Weather extends Component {
     };
   }
 
+  componentDidMount(){
+    let location=this.props.location.query.location;
+
+    if(location && location.length>0){
+      this.handleSearch(location);
+      window.location.hash='#/'
+    }
+  }
+
+  componentWillReceiveProps(newProps){
+    let location=newProps.location.query.location;
+
+    if(location && location.length>0){
+      this.handleSearch(location);
+      window.location.hash='#/'
+    }
+  }
+
   handleSearch(location) {
     this.setState({
       isLoading: true,
-      errorMessage: undefined
+      errorMessage: undefined,
+      location:undefined,
+      temp:undefined
     });
     let that = this;
     getTemp(location).then(function (temp) {
@@ -44,7 +64,6 @@ export default class Weather extends Component {
   }
 
   renderError(){
-    console.log('RenderError- error message is',this.state.errorMessage);
     if(this.state.errorMessage!==undefined){
       return <ErrorModal title={'OpenWeather Error'} message={this.state.errorMessage}/>
     }
@@ -53,7 +72,7 @@ export default class Weather extends Component {
     //console.log('inside render');
     return (
       <div>
-        <h1 className="text-center">Get Weather</h1>
+        <h1 className="text-center page-title">Get Weather</h1>
         <WeatherForm onSearch={this.handleSearch.bind(this)}/>
         {/*<WeatherMessage temp={this.state.temp} location={this.state.location}/>*/}
         {this.renderMessage(this.state.isLoading, this.state.temp, this.state.location)}
