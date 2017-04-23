@@ -12,8 +12,6 @@ const getTemp = function (location) {
     else {
       return response.main.temp;
     }
-  }, function (response) {
-    throw new Error(response.data.message);
   });
 };
 

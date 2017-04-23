@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import WeatherForm from "./WeatherForm";
 import WeatherMessage from "./WeatherMessage";
 import {getTemp} from "../api/openWeatherMap";
+import ErrorModal from "./ErrorModal";
 
 export default class Weather extends Component {
   constructor(props) {
@@ -12,14 +13,23 @@ export default class Weather extends Component {
   }
 
   handleSearch(location) {
-    this.setState({isLoading: true});
+    this.setState({
+      isLoading: true,
+      errorMessage: undefined
+    });
     let that = this;
     getTemp(location).then(function (temp) {
-        that.setState({location: location, temp: temp, isLoading: false});
+        that.setState({
+          location: location, temp: temp, isLoading: false,
+          errorMessage:undefined
+        });
       },
-      function (errorMessage) {
-        that.setState({isLoading: false});
-        alert(errorMessage);
+      function (e) {
+        that.setState({
+          isLoading: false,
+          errorMessage: e.responseJSON.message
+        });
+
       }
     )
   };
@@ -33,6 +43,12 @@ export default class Weather extends Component {
     }
   }
 
+  renderError(){
+    console.log('RenderError- error message is',this.state.errorMessage);
+    if(this.state.errorMessage!==undefined){
+      return <ErrorModal title={'OpenWeather Error'} message={this.state.errorMessage}/>
+    }
+  }
   render() {
     //console.log('inside render');
     return (
@@ -41,6 +57,7 @@ export default class Weather extends Component {
         <WeatherForm onSearch={this.handleSearch.bind(this)}/>
         {/*<WeatherMessage temp={this.state.temp} location={this.state.location}/>*/}
         {this.renderMessage(this.state.isLoading, this.state.temp, this.state.location)}
+        {this.renderError()}
       </div>
     )
   }
