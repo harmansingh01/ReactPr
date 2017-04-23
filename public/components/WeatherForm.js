@@ -19,7 +19,7 @@ export default class WeatherForm extends Component {
         <form onSubmit={this.onFormSubmit.bind(this)}>
           <label>Enter City</label>
           <input type="text" ref="location"/>
-          <input type="submit" label="Enter"/>
+          <button className="button expanded hollow" type="submit" >Get Weather</button>
         </form>
       </div>
     )

@@ -26,7 +26,7 @@ export default class Weather extends Component {
 
   renderMessage(isLoading, temp, location) {
     if (isLoading) {
-      return <h3>Fetching weather...</h3>;
+      return <h3 className="text-center">Fetching weather...</h3>;
     }
     else if (temp && location) {
       return <WeatherMessage temp={temp} location={location}/>;
@@ -37,7 +37,7 @@ export default class Weather extends Component {
     //console.log('inside render');
     return (
       <div>
-        <h3>Weather Component</h3>
+        <h1 className="text-center">Get Weather</h1>
         <WeatherForm onSearch={this.handleSearch.bind(this)}/>
         {/*<WeatherMessage temp={this.state.temp} location={this.state.location}/>*/}
         {this.renderMessage(this.state.isLoading, this.state.temp, this.state.location)}
